@@ -47,36 +47,30 @@ int main() {
     printf("Input y2: ");
     long long y2 = get_number();
 
-    long long new_x = abs(x1 - x2);
-    long long new_y = abs(y1 - y2);
+    long long dx = llabs(x1 - x2);
+    long long dy = llabs(y1 - y2);
 
-    char board[new_x + 2][new_y + 2] = {0}; 
-    long long moves = 1;
-    board[0][0] = 1;
-
-    int dx[] = {1, 2, 2, 1, -1, -2, -2, -1};
-    int dy[] = {2, 1, -1, -2, -2, -1, 1, 2};
-
-
-    while (board[new_x][new_y] == 0) {
-        for (int i = 0; i < new_x + 2; i++){
-            for (int j = 0; j < new_y + 2; j++) {
-                if (board[i][j] == moves) {
-                    for (int k = 0; k < 8; k++) {
-                        int ni = i + dx[k];
-                        int nj = j + dy[k];
-                        if (ni >= 0 && ni < new_x + 2 && nj >= 0 && nj < new_y + 2 && board[ni][nj] == 0) {
-                            board[ni][nj] = moves + 1;
-                        }
-                    }
-                }
-            }
-        }
-        moves++;
+    if (dx < dy) {
+        long long temp = dx;
+        dx = dy;
+        dy = temp;
     }
 
-    moves--;
+    long long m;
 
-    printf("Moves: %lld\n", moves);
+    if (dx == 1 && dy == 0) {
+        m = 3;
+    } else if (dx == 2 && dy == 2) {
+        m = 4;
+    } else {
+        long long lower1 = (dx + 1) / 2;
+        long long lower2 = (dx + dy + 2) / 3;
+        m = (lower1 > lower2) ? lower1 : lower2;
+
+        if ((m % 2) != ((dx + dy) % 2)) {
+            m++;
+        }
+    }
+    printf("Moves: %lld\n", m);
     return 0;
 }
