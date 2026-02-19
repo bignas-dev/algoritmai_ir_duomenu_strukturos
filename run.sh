@@ -1,7 +1,8 @@
 #!/bin/bash
 
 if [ "$1" == "a" ]; then
-    exit 69
+    gcc a_uzd.c -Wall -Wextra -o exec && ./exec
+    exit 0;
 fi
 
 if [ "$1" == "a" ]; then
