@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 
-long long get_number(void) {
+long long inputNumber() {
     char input[100];
     if (fgets(input, sizeof(input), stdin) == NULL) {
         printf("Error reading input\n");
@@ -39,13 +39,13 @@ long long get_number(void) {
 
 int main() {
     printf("Input x1: ");
-    long long x1 = get_number();
+    long long x1 = inputNumber();
     printf("Input y1: ");
-    long long y1 = get_number();
+    long long y1 = inputNumber();
     printf("Input x2: ");
-    long long x2 = get_number();
+    long long x2 = inputNumber();
     printf("Input y2: ");
-    long long y2 = get_number();
+    long long y2 = inputNumber();
 
     long long dx = llabs(x1 - x2);
     long long dy = llabs(y1 - y2);

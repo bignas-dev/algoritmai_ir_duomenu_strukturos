@@ -1,7 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-long long getNumber() {
+
+typedef struct Node {
+    long long val;
+    struct Node* next;
+} node_t;
+
+typedef struct Queue {
+    node_t* head;
+    node_t* tail;
+    int size;
+} queue_t;
+
+
+long long inputNumber() {
     char input[100];
     if (fgets(input, sizeof(input), stdin) == NULL) {
         printf("Error reading input\n");
@@ -35,18 +48,6 @@ long long getNumber() {
 
     return num;
 }
-
-
-typedef struct Node {
-    long long val;
-    struct Node* next;
-} node_t;
-
-typedef struct Queue {
-    node_t* head;
-    node_t* tail;
-    int size;
-} queue_t;
 
 node_t* createNode(long long val) {
     node_t* node = (node_t*)malloc(sizeof(node_t));
@@ -93,7 +94,7 @@ void push(queue_t* queue, long long val) {
 
 long long pop(queue_t* queue) {
     if (queue->head == NULL) {
-        printf("List is empty\n");
+        printf("Queue is empty\n");
         exit(1);
     }
 
@@ -159,20 +160,24 @@ int main() {
     printf("Type '1' to add, '2' to pop, '3' to get size, '4' to print, '5' to quit\n");
         
     while (1) {
-        long long c = getNumber();
+        printf("Choice: ");
+        long long c = inputNumber();
 
         if (c == 1) {
-            long long val = getNumber();
+            printf("Input number: ");
+            long long val = inputNumber();
             push(q, val);
         } else if (c == 2) {
             long long v = pop(q);
-            printf("%lld\n", v);
+            printf("Removed: %lld\n", v);
         } else if (c == 3) {
             int s = size(q);
-            printf("%d\n", s);
+            printf("Size: %d\n", s);
         } else if (c == 4) {
+            printf("Queue: ");
             print(q);
         } else if (c == 5) {
+            printf("Quiting\n");
             break;
         } else {
             printf("Invalid input: %lld\n", c);
